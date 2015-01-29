@@ -5,13 +5,17 @@ class PostsController < ApplicationController
     render :json => @posts
   end
 
+  def new
+    render :json => {}
+  end
+
   def create
     @post = Post.new(post_params)
 
-    if @post.save
+    if @post.save!
       render :json => @post
     else
-      puts "problem"
+      render :json => @post.errors.full_messages
     end
   end
 

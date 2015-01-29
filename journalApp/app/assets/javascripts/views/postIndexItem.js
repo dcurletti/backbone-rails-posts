@@ -1,11 +1,12 @@
 JournalApp.Views.PostIndexItem = Backbone.View.extend({
   tagName: "li",
+  className: 'post-item',
 
   template: JST['posts/postIndexItem'],
 
   events: {
     "click button" : "deleteItem",
-    "click": "showItem"
+    "click ": "showItem"
   },
 
   render: function(){
@@ -15,12 +16,12 @@ JournalApp.Views.PostIndexItem = Backbone.View.extend({
   },
 
   deleteItem: function(event){
+    event.stopPropagation();
     this.model.destroy();
     this.remove();
   },
 
   showItem: function(event) {
-    console.log(this.model);
     Backbone.history.navigate("/posts/" + this.model.id, {trigger: true});
   }
 
